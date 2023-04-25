@@ -3,27 +3,65 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
 /*** 
- * `quotes` array 
+ * `quotes` array containing five 'quote' objects
 ***/
+const quotes = [
+  {
+    quote: "Love your Enemies, for they tell you your Faults.",
+    source: "Benjamin Franklin",
+    citation: "Poor Richard's Almanack",
+    year: "1756"
+},{
+  quote: "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.",
+  source: "Helen Keller"
+},{
+  quote: "Beware; for I am fearless, and therefore powerful.",
+  source: "Mary Shelley",
+  citation: "Frankenstein"
+},{
+  quote: "I wanted you to see what real courage is, instead of getting the idea that courage is a man with a gun in his hand. It's when you know you're licked before you begin but you begin anyway and you see it through no matter what. You rarely win, but sometimes you do.",
+  source: "Harper Lee",
+  citation: "To Kill a Mockingbird"
+},{
+  quote: "The greatest glory in living lies not in never falling, but in rising every time we fall",
+  source: "Nelson Mandela"
+}];
 
 
 
 /***
  * `getRandomQuote` function
+ * Pulls a random quote object from quotes array
 ***/
 
+function getRandomQuote() {
+  let randomNumber = Math.floor(Math.random() * (quotes.length)); //creates and stores a random number from 0 to the last number of index of given array 
+  return quotes[randomNumber];
+}
 
 
 /***
  * `printQuote` function
+ * Prints random quote retrieved by getRandomQuote() on the browser
 ***/
 
+function printQuote() {
+  let randomQuote = getRandomQuote();                        
+  let htmlStr = `<p class="quote"> ${randomQuote.quote} </p>
+                 <p class="source"> ${randomQuote.source}`;
 
+  if (randomQuote.citation) {
+    htmlStr += `<span class="citation">${randomQuote.citation}</span>`; 
+  };
+
+  if (randomQuote.year) {
+    htmlStr += `<span class="year">${randomQuote.year}</span>`;
+  };
+
+  htmlStr += `</p>`
+  document.getElementById('quote-box').innerHTML = htmlStr;
+};
 
 /***
  * click event listener for the print quote button
