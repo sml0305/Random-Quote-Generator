@@ -11,10 +11,12 @@ const quotes = [
     quote: "Love your Enemies, for they tell you your Faults.",
     source: "Benjamin Franklin",
     citation: "Poor Richard's Almanack",
-    year: "1756"
+    year: "1756",
+    tags: "politics"
 },{
   quote: "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.",
-  source: "Helen Keller"
+  source: "Helen Keller",
+  tags: "life"
 },{
   quote: "Beware; for I am fearless, and therefore powerful.",
   source: "Mary Shelley",
@@ -59,13 +61,34 @@ function printQuote() {
     htmlStr += `<span class="year">${randomQuote.year}</span>`;
   };
 
+  if (randomQuote.tags) {
+    htmlStr += `<span class="tags">, ${randomQuote.tags}</span>`;
+  };
+
   htmlStr += `</p>`
   document.getElementById('quote-box').innerHTML = htmlStr;
+  
+  updateBackgoundColor(); //randomizes background color everytime printQuote() is called
+
 };
+
+/**Sets background color to a random color  */
+function updateBackgoundColor(){
+  document.body.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`
+}
+
+/**Timer function that calls printQuote() every 10 seconds  */
+function myTimer(){
+  setInterval(printQuote,15000);
+}
+
+myTimer(); //Will call printQuote() every 10 seconds updating quote and background color
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
+
+
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
